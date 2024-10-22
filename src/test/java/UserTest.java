@@ -1,26 +1,39 @@
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import io.restassured.response.ValidatableResponse;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import static io.restassured.RestAssured.given;
 
 public class UserTest {
+
     private UserClient client = new UserClient();
     private UserChecks check = new UserChecks();
+    private String accessToken;
+
+    @After
+    public void deleteUser() {
+        if(accessToken != null) {
+            ValidatableResponse response = client.deleteUser(accessToken);
+            String message = check.deletedSuccessfully(response);
+            assert message.contains("User successfully removed");
+        }
+    }
+
 
     @Test
     public void testCreateUser() {
         var user = User.generateUser();
         ValidatableResponse createResponse = client.createUser(user);
-        check.checkCreated(createResponse);
+        accessToken = check.checkCreated(createResponse);
     }
 
     @Test
     public void testCreateTwoIdenticalUser() {
         var user = User.generateUser();
         ValidatableResponse createResponse = client.createUser(user);
-        check.checkCreated(createResponse);
+        accessToken = check.checkCreated(createResponse);
 
         ValidatableResponse createResponse2 = client.createUser(user);
         String message = check.creationTwoIdenticalUser(createResponse2);
