@@ -28,7 +28,7 @@ public class LoginUserTest {
     public void testSuccessfullyLogin() {
         var creds = UserCredentials.fromUser(user);
         ValidatableResponse response = client.login(creds);
-        accessToken = check.checkCreated(response);
+        accessToken = check.checkLogin(response);
     }
 
     @Test

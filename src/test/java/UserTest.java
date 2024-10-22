@@ -1,10 +1,6 @@
-import io.restassured.RestAssured;
-import io.restassured.response.Response;
 import io.restassured.response.ValidatableResponse;
 import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
-import static io.restassured.RestAssured.given;
 
 public class UserTest {
 

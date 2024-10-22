@@ -5,7 +5,6 @@ import java.net.HttpURLConnection;
 import static java.net.HttpURLConnection.*;
 import static org.hamcrest.Matchers.notNullValue;
 import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertTrue;
 
 public class UserChecks {
 

@@ -1,8 +1,6 @@
 import io.restassured.http.ContentType;
 import io.restassured.response.ValidatableResponse;
 
-import java.util.Map;
-
 import static io.restassured.RestAssured.given;
 
 public class UserClient {
