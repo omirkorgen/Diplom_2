@@ -37,4 +37,15 @@ public class UserClient {
                 .post("/api/auth/login")
                 .then();
     }
+
+    public ValidatableResponse updateUser(String accessToken, UserCredentialsForUpdate userCredentialsForUpdate) {
+        return given()
+                .contentType(ContentType.JSON)
+                .auth().oauth2(accessToken)
+                .baseUri(BASE_URI)
+                .body(userCredentialsForUpdate)
+                .when()
+                .patch("/api/auth/user")
+                .then();
+    }
 }

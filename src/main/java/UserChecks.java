@@ -4,7 +4,7 @@ import java.net.HttpURLConnection;
 
 import static java.net.HttpURLConnection.*;
 import static org.hamcrest.Matchers.notNullValue;
-import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.*;
 
 public class UserChecks {
 
@@ -60,5 +60,23 @@ public class UserChecks {
                 .body("message", notNullValue())
                 .extract()
                 .path("message");
+    }
+
+    public void successfullyUpdatedData(ValidatableResponse response) {
+        boolean created = response
+                .assertThat()
+                .statusCode(HTTP_OK)
+                .extract()
+                .path("success");
+        assertTrue(created);
+    }
+
+    public void failedUpdatedData(ValidatableResponse response) {
+        boolean created = response
+                .assertThat()
+                .statusCode(HTTP_UNAUTHORIZED)
+                .extract()
+                .path("success");
+        assertFalse(created);
     }
 }
