@@ -1,3 +1,4 @@
+package user;
 
 public class UserCredentialsForUpdate {
     private String email;

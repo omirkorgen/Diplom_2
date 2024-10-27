@@ -1,4 +1,7 @@
+package user;
+
 import io.restassured.response.ValidatableResponse;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -12,6 +15,15 @@ public class UpdatingUserDataTest {
     public void setUp(){
         user = User.generateUser();
         accessToken = check.checkCreated(client.createUser(user));
+    }
+
+    @After
+    public void deleteUser() {
+        if(accessToken != null) {
+            ValidatableResponse response = client.deleteUser(accessToken);
+            String message = check.deletedSuccessfully(response);
+            assert message.contains("User successfully removed");
+        }
     }
 
     @Test
