@@ -4,7 +4,6 @@ import io.restassured.response.ValidatableResponse;
 
 import static java.net.HttpURLConnection.*;
 import static org.hamcrest.Matchers.notNullValue;
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 public class OrderChecks {

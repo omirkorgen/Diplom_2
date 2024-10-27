@@ -2,7 +2,6 @@ package order;
 
 import io.restassured.http.ContentType;
 import io.restassured.response.ValidatableResponse;
-import user.UserCredentials;
 
 import static io.restassured.RestAssured.given;
 
