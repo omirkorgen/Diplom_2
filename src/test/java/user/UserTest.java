@@ -1,9 +1,12 @@
 package user;
 
+import io.qameta.allure.Step;
+import io.qameta.allure.junit4.DisplayName;
 import io.restassured.response.ValidatableResponse;
 import org.junit.After;
 import org.junit.Test;
 
+@DisplayName("Создание пользователя")
 public class UserTest {
 
     private UserClient client = new UserClient();
@@ -11,6 +14,7 @@ public class UserTest {
     private String accessToken;
 
     @After
+    @Step("Удаление юзера по accessToken")
     public void deleteUser() {
         if(accessToken != null) {
             ValidatableResponse response = client.deleteUser(accessToken);
@@ -21,6 +25,7 @@ public class UserTest {
 
 
     @Test
+    @DisplayName("Успешное создание юзера")
     public void testCreateUser() {
         var user = User.generateUser();
         ValidatableResponse createResponse = client.createUser(user);
@@ -28,6 +33,7 @@ public class UserTest {
     }
 
     @Test
+    @DisplayName("Создание двух одинаковых юзеров")
     public void testCreateTwoIdenticalUser() {
         var user = User.generateUser();
         ValidatableResponse createResponse = client.createUser(user);
@@ -39,6 +45,7 @@ public class UserTest {
     }
 
     @Test
+    @DisplayName("Создание юзера без одного обязательно параметра")
     public void testCreationFails() {
         var user = User.generateUser();
         user.setPassword(null);

@@ -1,10 +1,13 @@
 package user;
 
+import io.qameta.allure.Step;
+import io.qameta.allure.junit4.DisplayName;
 import io.restassured.response.ValidatableResponse;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+@DisplayName("Логин Пользователя")
 public class LoginUserTest {
     private User user;
     private String accessToken;
@@ -12,12 +15,14 @@ public class LoginUserTest {
     private UserChecks check = new UserChecks();
 
     @Before
+    @Step("Создание юзера")
     public void setUp(){
         user = User.generateUser();
         client.createUser(user);
     }
 
     @After
+    @Step("Удаление юзера по accessToken")
     public void deleteUser() {
         if(accessToken != null) {
             ValidatableResponse response = client.deleteUser(accessToken);
@@ -27,6 +32,7 @@ public class LoginUserTest {
     }
 
     @Test
+    @DisplayName("Успешный логин")
     public void testSuccessfullyLogin() {
         var creds = UserCredentials.fromUser(user);
         ValidatableResponse response = client.login(creds);
@@ -34,6 +40,7 @@ public class LoginUserTest {
     }
 
     @Test
+    @DisplayName("Логин без пароля")
     public void testLoginWithoutOneParameter() {
         var creds = UserCredentials.fromUser(user);
         creds.setPassword("");

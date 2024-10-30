@@ -1,5 +1,6 @@
 package user;
 
+import io.qameta.allure.Step;
 import io.restassured.http.ContentType;
 import io.restassured.response.ValidatableResponse;
 
@@ -10,6 +11,7 @@ public class UserClient {
 
     public static final String BASE_URI = "https://stellarburgers.nomoreparties.site";
 
+    @Step("Отправка запроса на создания юзера")
     public ValidatableResponse createUser(User user) {
         return given()
                 .contentType(ContentType.JSON)
@@ -20,6 +22,7 @@ public class UserClient {
                 .then();
     }
 
+    @Step("Отпрака запроса на удаления юзера по accessToken")
     public ValidatableResponse deleteUser(String accessToken) {
         return given()
                 .contentType(ContentType.JSON)
@@ -30,6 +33,7 @@ public class UserClient {
                 .then();
     }
 
+    @Step("Отпрака запроса на логин юзера")
     public ValidatableResponse login(UserCredentials userCredentials) {
         return given()
                 .contentType(ContentType.JSON)
@@ -40,6 +44,7 @@ public class UserClient {
                 .then();
     }
 
+    @Step("Отпрака запроса на обновления данных юзера")
     public ValidatableResponse updateUser(String accessToken, UserCredentialsForUpdate userCredentialsForUpdate) {
         return given()
                 .contentType(ContentType.JSON)

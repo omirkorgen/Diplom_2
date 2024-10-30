@@ -1,5 +1,7 @@
 package user;
 
+import io.qameta.allure.Step;
+
 public class User {
         private String email;
         private String password;
@@ -10,7 +12,7 @@ public class User {
             this.password = password;
             this.name = name;
         }
-
+        @Step("Генерация данных для юзера")
         public static User generateUser() {
             return new User("zhumadata" + (int)(Math.random() * 10000) + "@yandex.ru", "Pass123", "Temirlan");
         }

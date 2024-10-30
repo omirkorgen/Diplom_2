@@ -1,5 +1,6 @@
 package user;
 
+import io.qameta.allure.Step;
 import io.restassured.response.ValidatableResponse;
 
 import java.net.HttpURLConnection;
@@ -10,6 +11,7 @@ import static org.junit.Assert.*;
 
 public class UserChecks {
 
+    @Step("Проверка ответа успешного логина")
     public String checkLogin(ValidatableResponse response) {
         String accessToken = response
                 .assertThat()
@@ -20,6 +22,7 @@ public class UserChecks {
         return accessToken.substring(7);
     }
 
+    @Step("Проверка ответа успешного создание юзера")
     public String checkCreated(ValidatableResponse response) {
         String accessToken = response
                 .assertThat()
@@ -30,6 +33,7 @@ public class UserChecks {
         return accessToken.substring(7);
     }
 
+    @Step("Проверка ответа создания двух одинаковых юзеров")
     public String creationTwoIdenticalUser(ValidatableResponse response) {
         return response.assertThat()
                 .statusCode(HTTP_FORBIDDEN)
@@ -39,6 +43,7 @@ public class UserChecks {
                 ;
     }
 
+    @Step("Проверка ответа успешного создание юзера")
     public String creationFailed(ValidatableResponse response) {
         return response.assertThat()
                 .statusCode(HTTP_FORBIDDEN)
@@ -48,6 +53,7 @@ public class UserChecks {
                 ;
     }
 
+    @Step("Проверка ответа успешного удаление юзера")
     public String deletedSuccessfully(ValidatableResponse response) {
         return response.assertThat()
                 .statusCode(HTTP_ACCEPTED)
@@ -56,6 +62,7 @@ public class UserChecks {
                 .path("message");
     }
 
+    @Step("Проверка ответа логина без обязательного параметра")
     public String loginFailedWithoutOneParameter(ValidatableResponse response) {
         return response.assertThat()
                 .statusCode(HTTP_UNAUTHORIZED)
@@ -64,6 +71,7 @@ public class UserChecks {
                 .path("message");
     }
 
+    @Step("Проверка ответа успешного обновления данных юзера")
     public void successfullyUpdatedData(ValidatableResponse response) {
         boolean created = response
                 .assertThat()
@@ -73,6 +81,7 @@ public class UserChecks {
         assertTrue(created);
     }
 
+    @Step("Проверка ответа обновления данных юзера без авторизации")
     public void failedUpdatedData(ValidatableResponse response) {
         boolean created = response
                 .assertThat()
